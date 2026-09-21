@@ -6,11 +6,13 @@ SRC_URI = "git://github.com/<org>/rdke-edgeai.git;protocol=https;branch=main"
 SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
-# wpeframework: Thunder plugin host. No local org.rdk.* sibling plugin recipe exists in
-# this checkout to copy from (traced packagegroup-application-layer.bb -- no org.rdk.*
-# Thunder plugin is actually built anywhere in this stack), so this recipe follows the
-# standard upstream Thunder plugin shape (SERVICE_REGISTRATION/IPlugin/JSONRPC) instead.
-DEPENDS = "wpeframework"
+# Real sibling found: entservices-displayinfo.bb at
+# mw/rdke/middleware/generic/meta-rdk-video/recipes-extended/entservices/ (missed earlier --
+# that's a populated layer tree under mw/rdke, distinct from the mostly-empty App/rdke
+# checkout searched first). It DEPENDS on "wpeframework wpeframework-tools-native" (the
+# latter provides the JSON-RPC/interface codegen tools) and lives under
+# recipes-extended/<component>/, not recipes-wpe/ -- matched here.
+DEPENDS = "wpeframework wpeframework-tools-native"
 
 inherit cmake
 
