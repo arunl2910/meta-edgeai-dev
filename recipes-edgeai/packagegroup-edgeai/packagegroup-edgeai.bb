@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "\
     edgeai-engine \
+    edgeai-schema \
     edgeai-task-nodes \
     edgeai-hal-bstorm \
 "
